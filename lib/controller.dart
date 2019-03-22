@@ -1,5 +1,4 @@
 import 'dart:async';
-import 'dart:convert';
 import 'dart:io';
 import 'package:aqueduct/aqueduct.dart';
 import 'package:expr_api/fake_utils.dart';
@@ -34,33 +33,32 @@ class ExprController extends ResourceController {
   }
 
 
-
   Future<Response> _propertyQuery() async {
     final map = await request.body.decode<Map<String, dynamic>>();
     if (! map.containsKey(KEY_USER_PROP_ID)) {
       final errMap = { "err_code": 1004, "err_msg": "缺少房屋的key值"};
-      return Response.ok(json.encode(errMap))..contentType = ContentType.json;
+      return Response.ok(errMap)..contentType = ContentType.json;
     }
 
     final propMap = Property().toJsonMap();
     /// add info to this open_id
-    return Response.ok(json.encode(propMap))..contentType = ContentType.json;
+    return Response.ok(propMap)..contentType = ContentType.json;
   }
 
   Future<Response> _propertyReg() async {
     final map = await request.body.decode<Map<String, dynamic>>();
     if (! map.containsKey(KEY_USER_OPEN_ID)) {
       final errMap = { "err_code": 1001, "err_msg": "缺少openid。"};
-      return Response.ok(json.encode(errMap))..contentType = ContentType.json;
+      return Response.ok(errMap)..contentType = ContentType.json;
     }
     if (! map.containsKey(KEY_USER_PROP_ADDR)) {
       final errMap = { "err_code": 1003, "err_msg": "缺少房屋位置信息。"};
-      return Response.ok(json.encode(errMap))..contentType = ContentType.json;
+      return Response.ok(errMap)..contentType = ContentType.json;
     }
 
     final errMap = { "prop_belongs": true };
     // add info to this open_id
-    return Response.ok(json.encode(errMap))..contentType = ContentType.json;
+    return Response.ok(errMap)..contentType = ContentType.json;
   }
 
 
@@ -69,12 +67,12 @@ class ExprController extends ResourceController {
     final map = await request.body.decode<Map<String, dynamic>>();
     if (! map.containsKey(KEY_USER_OPEN_ID)) {
       final errMap = { "err_code": 1001, "err_msg": "缺少openid。"};
-      return Response.ok(json.encode(errMap))..contentType = ContentType.json;
+      return Response.ok(errMap)..contentType = ContentType.json;
     }
     // check database,
 
     final errMap = { "err_code": 0, "err_msg": "ok!"};
-    return Response.ok(json.encode(errMap))..contentType = ContentType.json;
+    return Response.ok(errMap)..contentType = ContentType.json;
   }
 
   // API - user_exist
@@ -82,11 +80,11 @@ class ExprController extends ResourceController {
     final map = await request.body.decode<Map<String, dynamic>>();
     if (! map.containsKey(KEY_USER_OPEN_ID)) {
       final errMap = { "err_code": 1001, "err_msg": "缺少openid。"};
-      return Response.ok(json.encode(errMap))..contentType = ContentType.json;
+      return Response.ok(errMap)..contentType = ContentType.json;
     }
 
     final errMap = { "user_exist": false};
-    return Response.ok(json.encode(errMap))..contentType = ContentType.json;
+    return Response.ok(errMap)..contentType = ContentType.json;
 
   }
 
@@ -95,16 +93,16 @@ class ExprController extends ResourceController {
     final map = await request.body.decode<Map<String, dynamic>>();
     if (! map.containsKey(KEY_USER_OPEN_ID)) {
       final errMap = { "err_code": 1001, "err_msg": "缺少openid。"};
-      return Response.ok(json.encode(errMap))..contentType = ContentType.json;
+      return Response.ok(errMap)..contentType = ContentType.json;
     }
 
     if (! map.containsKey(KEY_USER_ID_NO)) {
       final errMap = { "err_code": 1002, "err_msg": "缺少身份证信息。"};
-      return Response.ok(json.encode(errMap))..contentType = ContentType.json;
+      return Response.ok(errMap)..contentType = ContentType.json;
     }
 
     final errMap = { "err_code": 0, "err_msg": "ok!"};
-    return Response.ok(json.encode(errMap))..contentType = ContentType.json;
+    return Response.ok(errMap)..contentType = ContentType.json;
 
   }
 
