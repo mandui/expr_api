@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:convert';
 import 'dart:io';
 import 'package:aqueduct/aqueduct.dart';
 import 'package:expr_api/fake_utils.dart';
@@ -41,8 +42,11 @@ class ExprController extends ResourceController {
     }
 
     final propMap = Property().toJsonMap();
+    final encoded = json.encode(propMap);
+    final decoded = json.decode(encoded);
+
     /// add info to this open_id
-    return Response.ok(propMap)..contentType = ContentType.json;
+    return Response.ok(decoded)..contentType = ContentType.json;
   }
 
   Future<Response> _propertyReg() async {

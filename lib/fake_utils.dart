@@ -1,3 +1,4 @@
+import 'dart:convert';
 class Property {
   final addrMap = Address().toJsonMap();
   final accountMap = Account().toJsonMap();
@@ -81,3 +82,17 @@ class Address {
     return map;
   }
 }
+/*
+
+void main() {
+  var prop = Property();
+  final map = Map<String, dynamic>();
+  //map["addrMap"] = prop.addrMap;
+
+
+  final fake = FakeAccountLog();
+  //map["fake"] = fake.logs;
+  map["accountMap"] = prop.accountMap;
+  print(json.encode(prop.toJsonMap()));
+
+}*/
