@@ -16,6 +16,7 @@ class ExprController extends ResourceController {
 
   @Operation.post()
   Future<Response> testApi() async {
+    print("POST: $api");
 
     if (api == null)
       return Response.ok("lack api method");
