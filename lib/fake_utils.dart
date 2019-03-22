@@ -30,19 +30,17 @@ class Account {
     map["freezedMoney"] = freezedMoney;
     map["freezedInterest"] = freezedInterest;
     map["accountLog"] = accountLog.logs;
-
+    return map;
   }
 }
 
 class FakeAccountLog {
-  var logs = List<Map<String, dynamic>>();
   FakeAccountLog() {
     logs.add(AccountLogItem().toJsonMap());
     logs.add(AccountLogItem().toJsonMap());
     logs.add(AccountLogItem().toJsonMap());
   }
-
-
+  var logs = List<Map<String, dynamic>>();
 }
 
 class AccountLogItem {
@@ -55,6 +53,7 @@ class AccountLogItem {
     map["time"] = time;
     map["desc"] = desc;
     map["money"] = money;
+    return map;
   }
 }
 
