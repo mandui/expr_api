@@ -25,7 +25,7 @@ class ExprController extends ResourceController {
       case "user_del": return _userDel();
 
       case "property_check": return _propertyReg();
-      case "property_id": return _propertyQuery();
+      case "property_query": return _propertyQuery();
 
       default:
         return Response.ok("no such method supported: $api");
