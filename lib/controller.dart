@@ -11,10 +11,9 @@ class ExprController extends ResourceController {
   final KEY_USER_PROP_ID = "prop_id";
   /// TODO error code should not be magic number
 
+  @Bind.path("api") String api;
 
-  @Bind.query("api") String api;
-
-  @Operation.post()
+  @Operation.post("api")
   Future<Response> testApi() async {
     print("POST: $api");
 
