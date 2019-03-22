@@ -1,4 +1,64 @@
 class Property {
+  final addrMap = Address().toJsonMap();
+  final accountMap = Account().toJsonMap();
+
+  Map<String, dynamic> toJsonMap() {
+    final map = Map<String, dynamic>();
+    map["prop_addr"] = addrMap;
+    map["prop_account"] = accountMap;
+
+    return map;
+  }
+}
+
+class Account {
+  var bankName = "中国交通银行";
+  var accountNo = "1234567";
+  var money = 15235.4;
+  var interest = 323.2;
+  var freezedMoney = 0;
+  var freezedInterest = 0;
+  var accountLog = FakeAccountLog();
+
+  Map<String, dynamic> toJsonMap() {
+    final map = Map<String, dynamic>();
+
+    map["bankName"] = bankName;
+    map["accountNo"] = accountNo;
+    map["money"] = money;
+    map["interest"] = interest;
+    map["freezedMoney"] = freezedMoney;
+    map["freezedInterest"] = freezedInterest;
+    map["accountLog"] = accountLog.logs;
+
+  }
+}
+
+class FakeAccountLog {
+  var logs = List<Map<String, dynamic>>();
+  FakeAccountLog() {
+    logs.add(AccountLogItem().toJsonMap());
+    logs.add(AccountLogItem().toJsonMap());
+    logs.add(AccountLogItem().toJsonMap());
+  }
+
+
+}
+
+class AccountLogItem {
+  var time = "2014-2-3";
+  var desc = "结息";
+  var money = "102.4";
+
+  Map<String, dynamic> toJsonMap() {
+    final map = Map<String, dynamic>();
+    map["time"] = time;
+    map["desc"] = desc;
+    map["money"] = money;
+  }
+}
+
+class Address {
   var city = "济南";
   var district = "历下区";
   var street = "舜华路";
