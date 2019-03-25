@@ -41,12 +41,8 @@ class ExprController extends ResourceController {
       return Response.ok(errMap)..contentType = ContentType.json;
     }
 
-    final propMap = Property().toJsonMap();
-    final encoded = json.encode(propMap);
-    final decoded = json.decode(encoded);
-
     /// add info to this open_id
-    return Response.ok(decoded)..contentType = ContentType.json;
+    return Response.ok(Property().toJsonMap())..contentType = ContentType.json;
   }
 
   Future<Response> _propertyReg() async {

@@ -2,12 +2,48 @@ import 'dart:convert';
 class Property {
   final addrMap = Address().toJsonMap();
   final accountMap = Account().toJsonMap();
+  final propInfo = PropertyInfo().toJsonMap();
+  final ownerInfo = OwnerInfo().toJsonMap();
 
   Map<String, dynamic> toJsonMap() {
     final map = Map<String, dynamic>();
     map["prop_addr"] = addrMap;
     map["prop_account"] = accountMap;
+    map["prop_Info"] = propInfo;
+    map["owner_info"] = ownerInfo;
 
+    return map;
+  }
+}
+
+class OwnerInfo {
+  var name = "某某";
+  var id = "000000 00000000 0000";
+  var tel = "13800138000";
+  var email = "xxxx@xxx.com";
+
+  Map<String, dynamic> toJsonMap() {
+    final map = Map<String, dynamic>();
+    map["name"] = name;
+    map["id"] = id;
+    map["tel"] = tel;
+    map["email"] = email;
+
+    return map;
+  }
+}
+
+class PropertyInfo {
+  var boughtDate = "2015年12月12日";
+  var area = "112.34平";
+  var price = "167002.6元";
+
+  Map<String, dynamic> toJsonMap() {
+    final map = Map<String, dynamic>();
+
+    map["boughtDate"] = boughtDate;
+    map["area"] = area;
+    map["price"] = price;
     return map;
   }
 }
