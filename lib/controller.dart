@@ -43,11 +43,11 @@ class ExprController extends ResourceController {
 
   Future<Response> _communityOperation() async {
     switch (api) {
-      case "community_list": return _communityList();
-      case "community_query": return _communityQuery();
-      case "community_public_events": return _communityPublicEvents();
-      case "community_vote": return _communityVote();
-      case "community_support_entry": return _communityEntries();
+      case "list": return _communityList();
+      case "query": return _communityQuery();
+      case "public_events": return _communityPublicEvents();
+      case "vote": return _communityVote();
+      case "support_entry": return _communityEntries();
       default:
         return Response.ok("no such method supported: $api");
     }
@@ -55,10 +55,10 @@ class ExprController extends ResourceController {
 
   Future<Response> _propertyOperation() async {
     switch (api) {
-      case "property_check": return _propertyReg();
-      case "property_query": return _propertyQuery();
-      case "property_list": return _propertyList();
-      case "property_query_no_reg": return _propertyQueryNoReg();
+      case "check": return _propertyReg();
+      case "query": return _propertyQuery();
+      case "list": return _propertyList();
+      case "query_no_reg": return _propertyQueryNoReg();
       default:
         return Response.ok("no such method supported: $api");
     }
