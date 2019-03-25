@@ -32,6 +32,7 @@ class ExprController extends ResourceController {
 
       case "community_list": return _communityList();
       case "community_query": return _communityQuery();
+      case "community_public_events": return _communityPublicEvents();
 
      default:
         return Response.ok("no such method supported: $api");
@@ -56,6 +57,21 @@ class ExprController extends ResourceController {
     }
 
     return Response.ok(CommInfo().toJsonMap())..contentType = ContentType.json;
+  }
+
+  Future<Response> _communityPublicEvents() async {
+    final map = await request.body.decode<Map<String, dynamic>>();
+    if (! map.containsKey(KEY_COMMU_ID)) {
+      final errMap = { "err_code": 1005, "err_msg": "缺少community key值"};
+      return Response.ok(errMap)..contentType = ContentType.json;
+    }
+
+    if (! map.containsKey(KEY_USER_OPEN_ID)) {
+      final errMap = { "err_code": 1001, "err_msg": "缺少openid值"};
+      return Response.ok(errMap)..contentType = ContentType.json;
+    }
+
+    return Response.ok(CommPublicEvents().toJsonMap())..contentType = ContentType.json;
   }
 
 

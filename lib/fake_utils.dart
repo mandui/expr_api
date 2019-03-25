@@ -219,10 +219,41 @@ class CommunityBrief {
   }
 }
 
+class CommPublicEvents {
+
+  CommPublicEvents() {
+    events.add(CommEvent("public_ev_01", "是否修改业主大会议事规则？", ["是", "否"]));
+    events.add(CommEvent("public_ev_02", "新增选举以下成员中哪位为业主委员会成员？", ["A君", "B君", "C君", "D君"]));
+    events.add(CommEvent("public_ev_03", "决定是否设立业主监事会？", ["是", "否"]));
+
+  }
+  var events = List<CommEvent>();
+  var comm_id = "key_to_specific_community";
+
+  Map<String, dynamic> toJsonMap() {
+    final map = Map<String, dynamic>();
+    map["public_events"] = events;
+    return map;
+  }
+
+}
+
 class CommEvent {
+  var event_id = "";
   var desc = "";
+  var chose = -1;
   var choices = [];
 
+  CommEvent(this.event_id, this.desc, this.choices);
+
+  Map<String, dynamic> toJsonMap() {
+    final map = Map<String, dynamic>();
+    map['event_id'] = event_id;
+    map['desc'] = desc;
+    map['choices'] = choices;
+    map['chose'] = chose;
+    return map;
+  }
 }
 
 class CommEventRatio {
