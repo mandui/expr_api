@@ -7,8 +7,9 @@ import 'package:expr_api/fake_utils.dart';
 class ExprController extends ResourceController {
   final KEY_USER_OPEN_ID = "openid";
   final KEY_USER_ID_NO = "id_no";
-  final KEY_USER_PROP_ADDR = "prop_addr";
-  final KEY_USER_PROP_ID = "prop_id";
+  final KEY_PROP_ADDR = "prop_addr";
+  final KEY_PROP_ID = "prop_id";
+  final KEY_COMMU_ID = "comm_id";
   /// TODO error code should not be magic number
 
   @Bind.path("api") String api;
@@ -29,10 +30,34 @@ class ExprController extends ResourceController {
       case "property_query": return _propertyQuery();
       case "property_list": return _propertyList();
 
-      default:
+      case "community_list": return _communityList();
+      case "community_query": return _communityQuery();
+
+     default:
         return Response.ok("no such method supported: $api");
     }
   }
+
+  Future<Response> _communityList() async {
+    final map = await request.body.decode<Map<String, dynamic>>();
+    if (! map.containsKey(KEY_USER_OPEN_ID)) {
+      final errMap = { "err_code": 1001, "err_msg": "缺少openid"};
+      return Response.ok(errMap)..contentType = ContentType.json;
+    }
+
+    return Response.ok(CommunityList().toJsonMap())..contentType = ContentType.json;
+  }
+
+  Future<Response> _communityQuery() async {
+    final map = await request.body.decode<Map<String, dynamic>>();
+    if (! map.containsKey(KEY_COMMU_ID)) {
+      final errMap = { "err_code": 1005, "err_msg": "缺少community key值"};
+      return Response.ok(errMap)..contentType = ContentType.json;
+    }
+
+    return Response.ok(CommunityList().toJsonMap())..contentType = ContentType.json;
+  }
+
 
   Future<Response> _propertyList() async {
     final map = await request.body.decode<Map<String, dynamic>>();
@@ -44,10 +69,9 @@ class ExprController extends ResourceController {
     return Response.ok(PropertyList().toJsonMap())..contentType = ContentType.json;
   }
 
-
   Future<Response> _propertyQuery() async {
     final map = await request.body.decode<Map<String, dynamic>>();
-    if (! map.containsKey(KEY_USER_PROP_ID)) {
+    if (! map.containsKey(KEY_PROP_ID)) {
       final errMap = { "err_code": 1004, "err_msg": "缺少房屋的key值"};
       return Response.ok(errMap)..contentType = ContentType.json;
     }
@@ -62,7 +86,7 @@ class ExprController extends ResourceController {
       final errMap = { "err_code": 1001, "err_msg": "缺少openid。"};
       return Response.ok(errMap)..contentType = ContentType.json;
     }
-    if (! map.containsKey(KEY_USER_PROP_ADDR)) {
+    if (! map.containsKey(KEY_PROP_ADDR)) {
       final errMap = { "err_code": 1003, "err_msg": "缺少房屋位置信息。"};
       return Response.ok(errMap)..contentType = ContentType.json;
     }

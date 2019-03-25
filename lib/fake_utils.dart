@@ -163,3 +163,50 @@ void main() {
   print(json.encode(prop.toJsonMap()));
 
 }*/
+
+class Community {
+
+}
+
+class CommInfo {
+  var comm_id = "key_to_specific_community";
+}
+
+class CommunityList {
+  CommunityList() {
+    final list = List<Map<String, dynamic>>();
+    list.add(CommunityBrief().toJsonMap());
+    list.add(CommunityBrief().toJsonMap());
+
+    comms['comm_list'] = list;
+  }
+  Map<String, List<Map<String, dynamic>>> comms = Map();
+
+  Map<String, dynamic> toJsonMap() {
+    return comms;
+  }
+}
+
+class CommunityBrief {
+  var commId = "key_to_specific_community";
+  var name = "xx小区";
+  var addr = "济南市历下区舜华路1269号得安大厦";
+
+  Map<String, dynamic> toJsonMap() {
+    final map = Map<String, dynamic>();
+    map['comm_id'] = commId;
+    map['name'] = name;
+    map['addr'] = addr;
+    return map;
+  }
+}
+
+class CommEvent {
+  var desc = "";
+  var choices = [];
+
+}
+
+class CommEventRatio {
+
+}
