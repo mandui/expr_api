@@ -19,7 +19,7 @@ class ExprApiChannel extends ApplicationChannel {
       });
 
     router
-      .route("/wechat/expr/[:which]/[:api]")
+      .route("/wechat/expr/:which/:api")
       .link(() => ExprController());
 
     return router;
