@@ -189,8 +189,8 @@ class CommunityList {
 
 class CommunityBrief {
   var commId = "key_to_specific_community";
-  var name = "xx小区";
-  var addr = "济南市历下区舜华路1269号得安大厦";
+  var name = "得安大厦";
+  var addr = "济南市历下区舜华路1269号";
 
   Map<String, dynamic> toJsonMap() {
     final map = Map<String, dynamic>();
