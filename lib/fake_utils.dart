@@ -1,4 +1,3 @@
-import 'dart:convert';
 class Property {
   final addrMap = Address().toJsonMap();
   final accountMap = Account().toJsonMap();
@@ -12,6 +11,38 @@ class Property {
     map["prop_Info"] = propInfo;
     map["owner_info"] = ownerInfo;
 
+    return map;
+  }
+}
+
+class PropertyList {
+  Map<String, List<Map<String, dynamic>>> props = Map();
+
+  PropertyList() {
+    final list = List<Map<String, dynamic>>();
+    list.add(PropertyBrief().toJsonMap());
+    list.add(PropertyBrief().toJsonMap());
+
+    props['prop_list'] = list;
+  }
+
+  Map<String, dynamic> toJsonMap() {
+    return props;
+  }
+}
+
+class PropertyBrief {
+  var prop_id = "key_to_specific_property";
+  var community = "济南市历下区舜华路1269号得安大厦";
+  var room = "309室";
+  var fund = 5072.6;
+
+  Map<String, dynamic> toJsonMap() {
+    final map = Map<String, dynamic>();
+    map["prop_id"] = prop_id;
+    map["community"] = community;
+    map["room"] = room;
+    map["fund"] = fund;
     return map;
   }
 }

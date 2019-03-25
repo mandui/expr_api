@@ -27,10 +27,21 @@ class ExprController extends ResourceController {
 
       case "property_check": return _propertyReg();
       case "property_query": return _propertyQuery();
+      case "property_list": return _propertyList();
 
       default:
         return Response.ok("no such method supported: $api");
     }
+  }
+
+  Future<Response> _propertyList() async {
+    final map = await request.body.decode<Map<String, dynamic>>();
+    if (! map.containsKey(KEY_USER_PROP_ID)) {
+      final errMap = { "err_code": 1001, "err_msg": "缺少openid"};
+      return Response.ok(errMap)..contentType = ContentType.json;
+    }
+
+    return Response.ok(PropertyList().toJsonMap())..contentType = ContentType.json;
   }
 
 
