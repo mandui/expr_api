@@ -222,9 +222,20 @@ class CommunityBrief {
 class CommPublicEvents {
 
   CommPublicEvents() {
-    events.add(CommEvent("public_ev_01", "是否修改业主大会议事规则？", ["是", "否"]).toJsonMap());
-    events.add(CommEvent("public_ev_02", "新增选举以下成员中哪位为业主委员会成员？", ["A君", "B君", "C君", "D君"]).toJsonMap());
-    events.add(CommEvent("public_ev_03", "决定是否设立业主监事会？", ["是", "否"]).toJsonMap());
+    final ev1 = CommEvent("public_ev_01", "是否修改业主大会议事规则？", ["是", "否"])
+      ..ratio = [0.25, 0.15]
+      ..areaRatio = [0.13, 0.29];
+    events.add(ev1.toJsonMap());
+
+    final ev2 = CommEvent("public_ev_02", "新增选举以下成员中哪位为业主委员会成员？", ["A君", "B君", "C君", "D君"])
+      ..ratio = [0.2, 0.01, 0.3, 0]
+      ..areaRatio = [0.13, 0.05, 0.31, 0];
+    events.add(ev2.toJsonMap());
+
+    final ev3 = CommEvent("public_ev_03", "决定是否设立业主监事会？", ["是", "否"])
+      ..ratio = [0.25, 0.15]
+      ..areaRatio = [0.13, 0.29];
+    events.add(ev3.toJsonMap());
 
   }
   var events = List<Map<String, dynamic>>();
@@ -243,6 +254,8 @@ class CommEvent {
   var desc = "";
   var chose = -1;
   var choices = [];
+  var ratio = [];
+  var areaRatio = [];
 
   CommEvent(this.event_id, this.desc, this.choices);
 
@@ -252,6 +265,8 @@ class CommEvent {
     map['desc'] = desc;
     map['choices'] = choices;
     map['chose'] = chose;
+    map['ratio'] = ratio;
+    map['areaRatio'] = areaRatio;
     return map;
   }
 }

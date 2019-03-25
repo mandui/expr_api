@@ -10,6 +10,8 @@ class ExprController extends ResourceController {
   final KEY_PROP_ADDR = "prop_addr";
   final KEY_PROP_ID = "prop_id";
   final KEY_COMMU_ID = "comm_id";
+  final KEY_COMMU_EVENT_ID = "comm_event_id";
+
   /// TODO error code should not be magic number
 
   @Bind.path("api") String api;
@@ -33,10 +35,35 @@ class ExprController extends ResourceController {
       case "community_list": return _communityList();
       case "community_query": return _communityQuery();
       case "community_public_events": return _communityPublicEvents();
+      case "community_vote": return _commnityVote();
 
      default:
         return Response.ok("no such method supported: $api");
     }
+  }
+
+  Future<Response> _commnityVote() async {
+    final map = await request.body.decode<Map<String, dynamic>>();
+
+    if (! map.containsKey(KEY_COMMU_EVENT_ID)) {
+      final errMap = { "err_code": 1006, "err_msg": "缺少community event id值"};
+      return Response.ok(errMap)..contentType = ContentType.json;
+    }
+    if (! map.containsKey(KEY_COMMU_ID)) {
+      final errMap = { "err_code": 1005, "err_msg": "缺少community key值"};
+      return Response.ok(errMap)..contentType = ContentType.json;
+    }
+
+    if (! map.containsKey(KEY_USER_OPEN_ID)) {
+      final errMap = { "err_code": 1001, "err_msg": "缺少openid值"};
+      return Response.ok(errMap)..contentType = ContentType.json;
+    }
+
+    final ev = CommEvent("public_ev_01", "是否修改业主大会议事规则？", ["是", "否"])
+      ..ratio = [0.25, 0.15]
+      ..areaRatio = [0.13, 0.29]
+      ..chose = 1;
+    return Response.ok(ev.toJsonMap())..contentType = ContentType.json;
   }
 
   Future<Response> _communityList() async {
