@@ -31,18 +31,19 @@ class ExprController extends ResourceController {
       case "property_check": return _propertyReg();
       case "property_query": return _propertyQuery();
       case "property_list": return _propertyList();
+      //case "property_query_no_reg": return _propertyQueryNoReg();
 
       case "community_list": return _communityList();
       case "community_query": return _communityQuery();
       case "community_public_events": return _communityPublicEvents();
-      case "community_vote": return _commnityVote();
+      case "community_vote": return _communityVote();
 
      default:
         return Response.ok("no such method supported: $api");
     }
   }
 
-  Future<Response> _commnityVote() async {
+  Future<Response> _communityVote() async {
     final map = await request.body.decode<Map<String, dynamic>>();
 
     if (! map.containsKey(KEY_COMMU_EVENT_ID)) {
