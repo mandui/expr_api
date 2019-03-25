@@ -12,6 +12,8 @@ class ExprController extends ResourceController {
   final KEY_COMMU_ID = "comm_id";
   final KEY_COMMU_EVENT_ID = "comm_event_id";
   final KEY_COMMU_EVENT_CHOSE = "comm_event_chose";
+  final KEY_ID = "id";
+  final KEY_ACCOUNT_NO = "account_no";
 
   /// TODO error code should not be magic number
 
@@ -32,7 +34,7 @@ class ExprController extends ResourceController {
       case "property_check": return _propertyReg();
       case "property_query": return _propertyQuery();
       case "property_list": return _propertyList();
-      //case "property_query_no_reg": return _propertyQueryNoReg();
+      case "property_query_no_reg": return _propertyQueryNoReg();
 
       case "community_list": return _communityList();
       case "community_query": return _communityQuery();
@@ -144,6 +146,17 @@ class ExprController extends ResourceController {
     final errMap = { "prop_belongs": true };
     // add info to this open_id
     return Response.ok(errMap)..contentType = ContentType.json;
+  }
+
+  Future<Response> _propertyQueryNoReg() async {
+    final map = await request.body.decode<Map<String, dynamic>>();
+    if (! map.containsKey(KEY_ID) && ! map.containsKey(KEY_ACCOUNT_NO)) {
+      final errMap = { "err_code": 1009, "err_msg": "缺少身份信息或是账号信息"};
+      return Response.ok(errMap)..contentType = ContentType.json;
+    }
+
+    /// add info to this open_id
+    return Response.ok(ListProperty().toJsonMap())..contentType = ContentType.json;
   }
 
 

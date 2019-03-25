@@ -15,6 +15,20 @@ class Property {
   }
 }
 
+class ListProperty {
+  ListProperty() {
+    props = List();
+    props.add(Property().toJsonMap());
+  }
+
+  List<Map<String, dynamic>> props;
+  Map<String, dynamic> toJsonMap() {
+    final map = Map<String, dynamic>();
+    map["prop_list"] = props;
+    return map;
+  }
+}
+
 class PropertyList {
   Map<String, List<Map<String, dynamic>>> props = Map();
 
