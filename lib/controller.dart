@@ -18,18 +18,19 @@ class ExprController extends ResourceController {
   /// TODO error code should not be magic number
 
   @Bind.path("api") String api;
+  @Bind.path("which") String which;
 
   @Operation.post("api")
   Future<Response> testApi() async {
-    print("POST: $api");
+    print("POST: $which: $api");
 
     if (api == null)
       return Response.ok("lack api method");
+    if (which == null)
+      return Response.ok("lack which info");
 
-    switch(api) {
-      case "user_reg": return _userReg();
-      case "user_exist": return _userExist();
-      case "user_del": return _userDel();
+    switch(which) {
+      case "user": return _userOperation();
 
       case "property_check": return _propertyReg();
       case "property_query": return _propertyQuery();
@@ -43,6 +44,16 @@ class ExprController extends ResourceController {
       case "community_support_entry": return _communityEntries();
 
      default:
+        return Response.ok("no such method supported: $api");
+    }
+  }
+
+  Future<Response> _userOperation() async {
+    switch (api) {
+      case "user_reg": return _userReg();
+      case "user_exist": return _userExist();
+      case "user_del": return _userDel();
+      default:
         return Response.ok("no such method supported: $api");
     }
   }
