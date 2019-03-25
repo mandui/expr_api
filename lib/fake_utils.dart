@@ -170,6 +170,24 @@ class Community {
 
 class CommInfo {
   var comm_id = "key_to_specific_community";
+  var name = "得安大厦";
+  var addr = "济南市历下区舜华路1269号";
+  var manager = "xxxx物业管理公司";
+  var area = 113245.2;
+  var managerTel = "0531-xxxxxxxx";
+  var etc = "something more";
+
+  Map<String, dynamic> toJsonMap() {
+    final map = Map<String, dynamic>();
+    map['comm_id'] = comm_id;
+    map['name'] = name;
+    map['addr'] = addr;
+    map['manager'] = manager;
+    map['area'] = area;
+    map['managerTel'] = managerTel;
+    map['etc'] = etc;
+    return map;
+  }
 }
 
 class CommunityList {

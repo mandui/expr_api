@@ -55,7 +55,7 @@ class ExprController extends ResourceController {
       return Response.ok(errMap)..contentType = ContentType.json;
     }
 
-    return Response.ok(CommunityList().toJsonMap())..contentType = ContentType.json;
+    return Response.ok(CommInfo().toJsonMap())..contentType = ContentType.json;
   }
 
 
