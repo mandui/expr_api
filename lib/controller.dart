@@ -36,7 +36,7 @@ class ExprController extends ResourceController {
 
   Future<Response> _propertyList() async {
     final map = await request.body.decode<Map<String, dynamic>>();
-    if (! map.containsKey(KEY_USER_PROP_ID)) {
+    if (! map.containsKey(KEY_USER_OPEN_ID)) {
       final errMap = { "err_code": 1001, "err_msg": "缺少openid"};
       return Response.ok(errMap)..contentType = ContentType.json;
     }
