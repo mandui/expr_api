@@ -32,27 +32,43 @@ class ExprController extends ResourceController {
     switch(which) {
       case "user": return _userOperation();
 
-      case "property_check": return _propertyReg();
-      case "property_query": return _propertyQuery();
-      case "property_list": return _propertyList();
-      case "property_query_no_reg": return _propertyQueryNoReg();
+      case "property": return _propertyOperation();
 
+      case "community": return _communityOperation();
+
+      default:
+        return Response.ok("no such subject supported: $api");
+    }
+  }
+
+  Future<Response> _communityOperation() async {
+    switch (api) {
       case "community_list": return _communityList();
       case "community_query": return _communityQuery();
       case "community_public_events": return _communityPublicEvents();
       case "community_vote": return _communityVote();
       case "community_support_entry": return _communityEntries();
+      default:
+        return Response.ok("no such method supported: $api");
+    }
+  }
 
-     default:
+  Future<Response> _propertyOperation() async {
+    switch (api) {
+      case "property_check": return _propertyReg();
+      case "property_query": return _propertyQuery();
+      case "property_list": return _propertyList();
+      case "property_query_no_reg": return _propertyQueryNoReg();
+      default:
         return Response.ok("no such method supported: $api");
     }
   }
 
   Future<Response> _userOperation() async {
     switch (api) {
-      case "user_reg": return _userReg();
-      case "user_exist": return _userExist();
-      case "user_del": return _userDel();
+      case "reg": return _userReg();
+      case "exist": return _userExist();
+      case "del": return _userDel();
       default:
         return Response.ok("no such method supported: $api");
     }
