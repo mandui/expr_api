@@ -40,10 +40,24 @@ class ExprController extends ResourceController {
       case "community_query": return _communityQuery();
       case "community_public_events": return _communityPublicEvents();
       case "community_vote": return _communityVote();
+      case "community_support_entry": return _communityEntries();
 
      default:
         return Response.ok("no such method supported: $api");
     }
+  }
+
+  Future<Response> _communityEntries() async {
+    final map = await request.body.decode<Map<String, dynamic>>();
+    if (! map.containsKey(KEY_COMMU_ID)) {
+      final errMap = { "err_code": 1005, "err_msg": "缺少community id"};
+      return Response.ok(errMap)..contentType = ContentType.json;
+    }
+
+    final retMap = Map<String, dynamic>();
+    retMap["entries"] = ["小区简介", "公共事务决议", "维修事项决议"];
+
+    return Response.ok(retMap)..contentType = ContentType.json;
   }
 
   Future<Response> _communityVote() async {
