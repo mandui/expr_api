@@ -11,6 +11,7 @@ class ExprController extends ResourceController {
   final KEY_PROP_ID = "prop_id";
   final KEY_COMMU_ID = "comm_id";
   final KEY_COMMU_EVENT_ID = "comm_event_id";
+  final KEY_COMMU_EVENT_CHOSE = "comm_event_chose";
 
   /// TODO error code should not be magic number
 
@@ -57,6 +58,11 @@ class ExprController extends ResourceController {
 
     if (! map.containsKey(KEY_USER_OPEN_ID)) {
       final errMap = { "err_code": 1001, "err_msg": "缺少openid值"};
+      return Response.ok(errMap)..contentType = ContentType.json;
+    }
+
+    if (! map.containsKey(KEY_COMMU_EVENT_CHOSE)) {
+      final errMap = { "err_code": 1007, "err_msg": "缺少选择值"};
       return Response.ok(errMap)..contentType = ContentType.json;
     }
 
