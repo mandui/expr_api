@@ -222,12 +222,12 @@ class CommunityBrief {
 class CommPublicEvents {
 
   CommPublicEvents() {
-    events.add(CommEvent("public_ev_01", "是否修改业主大会议事规则？", ["是", "否"]));
-    events.add(CommEvent("public_ev_02", "新增选举以下成员中哪位为业主委员会成员？", ["A君", "B君", "C君", "D君"]));
-    events.add(CommEvent("public_ev_03", "决定是否设立业主监事会？", ["是", "否"]));
+    events.add(CommEvent("public_ev_01", "是否修改业主大会议事规则？", ["是", "否"]).toJsonMap());
+    events.add(CommEvent("public_ev_02", "新增选举以下成员中哪位为业主委员会成员？", ["A君", "B君", "C君", "D君"]).toJsonMap());
+    events.add(CommEvent("public_ev_03", "决定是否设立业主监事会？", ["是", "否"]).toJsonMap());
 
   }
-  var events = List<CommEvent>();
+  var events = List<Map<String, dynamic>>();
   var comm_id = "key_to_specific_community";
 
   Map<String, dynamic> toJsonMap() {
