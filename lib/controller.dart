@@ -65,8 +65,13 @@ class ExprController extends ResourceController {
         return Response.ok(ev.toJsonMap())..contentType = ContentType.json;
       }
 
-      case "comm_vote":
-        return Response.ok(CommPublicEvents().toJsonMap())..contentType = ContentType.json;
+      case "vote": {
+        final map = Map<String, dynamic>();
+        map["ratio"] = [0.21, 0.05];
+        map["areaRatio"] = [0.35, 0.03];
+
+        return Response.ok(map)..contentType = ContentType.json;
+      }
 
       case "prop_query":
         return Response.ok(ExprPropertyList().toJsonMap())..contentType = ContentType.json;
