@@ -265,12 +265,12 @@ class CommPublicEvents {
 
 }
 
-class ExprPropertyList {
+class ExprProperty {
   final addrMap = Address().toJsonMap();
   final accountMap = Account().toJsonMap();
   final propInfo = PropertyInfo().toJsonMap();
   final ownerInfo = OwnerInfo().toJsonMap();
-  final commVote = CommPublicEvents().toJsonMap();
+  final commVote = CommPublicEvents().events;
 
   Map<String, dynamic> toJsonMap() {
     final map = Map<String, dynamic>();
@@ -280,6 +280,18 @@ class ExprPropertyList {
     map["prop_account"] = accountMap;
     map["comm_vote"] = commVote;
 
+    return map;
+  }
+}
+
+class ExprPropertyList {
+  Map<String, dynamic> toJsonMap() {
+    List<Map<String, dynamic>> props = List();
+    props.add(ExprProperty().toJsonMap());
+    props.add(ExprProperty().toJsonMap());
+
+    final map = Map<String, dynamic>();
+    map["prop_list"] = props;
     return map;
   }
 }
