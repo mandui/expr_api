@@ -265,6 +265,25 @@ class CommPublicEvents {
 
 }
 
+class ExprPropertyList {
+  final addrMap = Address().toJsonMap();
+  final accountMap = Account().toJsonMap();
+  final propInfo = PropertyInfo().toJsonMap();
+  final ownerInfo = OwnerInfo().toJsonMap();
+  final commVote = CommPublicEvents().toJsonMap();
+
+  Map<String, dynamic> toJsonMap() {
+    final map = Map<String, dynamic>();
+    map["prop_addr"] = addrMap;
+    map["prop_Info"] = propInfo;
+    map["prop_owner"] = accountMap;
+    map["prop_account"] = accountMap;
+    map["comm_vote"] = commVote;
+
+    return map;
+  }
+}
+
 class CommEvent {
   var event_id = "";
   var desc = "";

@@ -31,15 +31,52 @@ class ExprController extends ResourceController {
 
     switch(which) {
       case "user": return _userOperation();
-
       case "property": return _propertyOperation();
-
       case "community": return _communityOperation();
 
+      case "expr": return _exprOperation();
+
+      /*default:
+        return Response.ok("no such subject supported: $api");*/
+    }
+
+
+    return Response.ok("no such subject supported: $which $api");
+  }
+
+  Future<Response> _exprOperation() async {
+    switch (api) {
+      case "prop_addr_one":
+        return Response.ok(Address().toJsonMap())..contentType = ContentType.json;
+
+      case "prop_info_one":
+        return Response.ok(PropertyInfo().toJsonMap())..contentType = ContentType.json;
+
+      case "prop_owner_one":
+        return Response.ok(OwnerInfo().toJsonMap())..contentType = ContentType.json;
+
+      case "prop_account_one":
+        return Response.ok(Account().toJsonMap())..contentType = ContentType.json;
+
+      case "comm_vote_one": {
+        final ev = CommEvent("public_ev_01", "是否修改业主大会议事规则？", ["是", "否"])
+          ..ratio = [0.25, 0.15]
+          ..areaRatio = [0.13, 0.29];
+        return Response.ok(ev.toJsonMap())..contentType = ContentType.json;
+      }
+
+      case "comm_vote":
+        return Response.ok(CommPublicEvents().toJsonMap())..contentType = ContentType.json;
+
+      case "prop_query":
+        return Response.ok(ExprPropertyList().toJsonMap())..contentType = ContentType.json;
+
+
       default:
-        return Response.ok("no such subject supported: $api");
+        return Response.ok("no such method supported: $api");
     }
   }
+
 
   Future<Response> _communityOperation() async {
     switch (api) {
