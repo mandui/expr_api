@@ -274,10 +274,12 @@ class ExprProperty {
 
   Map<String, dynamic> toJsonMap() {
     final map = Map<String, dynamic>();
+    map["prop_id"] = "key_to_this_property";
     map["prop_addr"] = addrMap;
     map["prop_Info"] = propInfo;
     map["prop_owner"] = accountMap;
     map["prop_account"] = accountMap;
+    map["comm_id"] = "key_to_this_community";
     map["comm_vote"] = commVote;
 
     return map;
