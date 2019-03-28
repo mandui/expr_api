@@ -17,6 +17,12 @@ class ExprApiChannel extends ApplicationChannel {
       .linkFunction((request) async {
         return Response.ok({"key": "value"});
       });
+    
+    router.route("/cors")
+      .linkFunction((request) async {
+        return Response.ok("cors",
+            headers: { "Access-Control-Request-Origin" : "localhost:8080"});
+    });
 
     router
       .route("/wechat/:which/:api")

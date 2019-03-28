@@ -20,6 +20,7 @@ class ExprController extends ResourceController {
   @Bind.path("api") String api;
   @Bind.path("which") String which;
 
+
   @Operation.post("which", "api")
   Future<Response> testApi() async {
     print("POST: $which: $api");
@@ -73,11 +74,13 @@ class ExprController extends ResourceController {
         return Response.ok(map)..contentType = ContentType.json;
       }
 
-      case "prop_query":
-        return Response.ok(ExprPropertyList().toJsonMap())
-          ..contentType = ContentType.json
-            ..headers = {"Access-Control-Allow-Origin": "http://localhost:8080/#/into"};
+      case "prop_query": {
+        if (request.acceptableContentTypes.contains("application/xml")) {
 
+        } else
+          return Response.ok(ExprPropertyList().toJsonMap())
+            ..contentType = ContentType.json;
+      }
 
       default:
         return Response.ok("no such method supported: $api");
