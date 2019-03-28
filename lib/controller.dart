@@ -21,15 +21,14 @@ class ExprController extends ResourceController {
   @Bind.path("which") String which;
 
 
-  @override
-  FutureOr<RequestOrResponse> handle(Request request) {
+  @Operation.post("which", "api") {
     print(request.method);
     print("POST: $which: $api");
 
-    if (api == null)
+   if (api == null)
       return Response.ok("lack api method");
     if (which == null)
-      return Response.ok("lack which info");
+    return Response.ok("lack which info");
 
     switch(which) {
       case "user": return _userOperation();
@@ -38,7 +37,7 @@ class ExprController extends ResourceController {
 
       case "expr": return _exprOperation();
 
-    /*default:
+      /*default:
         return Response.ok("no such subject supported: $api");*/
     }
 
