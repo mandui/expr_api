@@ -20,8 +20,9 @@ class ExprApiChannel extends ApplicationChannel {
     
     router.route("/cors")
       .linkFunction((request) async {
-        return Response.ok("cors",
-            headers: { "Access-Control-Request-Origin" : "localhost:8080"});
+        if (request.isCORSRequest)
+          return Response.ok("cors",
+            headers: { "Access-Control-Request-Origin" : "*"});
     });
 
     router
