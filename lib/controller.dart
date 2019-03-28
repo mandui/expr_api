@@ -80,9 +80,9 @@ class ExprController extends ResourceController {
         if (request.isCORSRequest) {
           return Response.ok("cors",
               headers: { "Access-Control-Request-Origin" : "*"});
-        } else
+        }
         return Response.ok(ExprPropertyList().toJsonMap())
-          ..contentType = ContentType.json;
+           ..contentType = ContentType.json;
 
       }
 
