@@ -21,7 +21,8 @@ class ExprController extends ResourceController {
   @Bind.path("which") String which;
 
 
-  @Operation.post("which", "api") {
+  @Operation.post("which", "api")
+  Future<Response> testApi() async{
     print(request.method);
     print("POST: $which: $api");
 
