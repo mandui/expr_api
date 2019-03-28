@@ -74,7 +74,9 @@ class ExprController extends ResourceController {
       }
 
       case "prop_query":
-        return Response.ok(ExprPropertyList().toJsonMap())..contentType = ContentType.json;
+        return Response.ok(ExprPropertyList().toJsonMap())
+          ..contentType = ContentType.json
+            ..headers = {"Access-Control-Allow-Origin": "*", "Access-Control-Allow-Credentials": true};
 
 
       default:
