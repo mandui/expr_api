@@ -75,11 +75,9 @@ class ExprController extends ResourceController {
       }
 
       case "prop_query": {
-        if (request.acceptableContentTypes.contains("application/xml")) {
+        return Response.ok(ExprPropertyList().toJsonMap())
+          ..contentType = ContentType.json;
 
-        } else
-          return Response.ok(ExprPropertyList().toJsonMap())
-            ..contentType = ContentType.json;
       }
 
       default:
